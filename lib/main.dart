@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Center(
                 child: Text(
-                  "Your cookies:",
+                  'Your cookies:',
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ),
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: getCookies()
                       .map((MapEntry<String, String> cookieEntry) =>
                           SelectableText(
-                            "${cookieEntry.key} => ${cookieEntry.value}",
+                            '${cookieEntry.key} => ${cookieEntry.value}',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline6
@@ -64,11 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
   Iterable<MapEntry<String, String>> getCookies() {
-    String cookieString = window.document.cookie ?? "";
+    String cookieString = window.document.cookie ?? '';
 
     return cookieString
-        .split("; ")
+        .split('; ')
         .map((String cookieEntryString) => cookieEntryString.split('='))
+        .where((List<String> cookieEntry) => cookieEntry.length == 2)
         .map((List<String> cookieEntry) =>
             MapEntry<String, String>(cookieEntry[0], cookieEntry[1]));
   }
